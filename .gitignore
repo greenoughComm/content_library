@@ -12,11 +12,11 @@
 !/log/.keep
 /tmp
 
-/config/database.yml
-/config/secrets.yml
-/config/deploy.rb
-/config/carrierwave.rb
-/config/initializers/devise.rb
-/config/initializers/carrierwave.rb
-/config/initializers/fog.rb
-/config/local_env.yml
+# /config/database.yml
+# /config/secrets.yml
+# /config/deploy.rb
+# /config/carrierwave.rb
+# /config/initializers/devise.rb
+# /config/initializers/carrierwave.rb
+# /config/initializers/fog.rb
+# /config/local_env.yml
