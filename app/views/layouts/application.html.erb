@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Library</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script>
+    function selection() {
+		var serviceline = $('#servicelines option:selected').text();
+		var businessType = $('#businesses option:selected').text();
+		var facilityType = $('#facility_type option:selected').text();
+		var fileType = $('#filetypes option:selected').text();
+		var dateSort = $('#datecreated option:selected').text();
+		var stateSort = $('#state_select option:selected').text();
+	    $('#results tr').each(function () {
+	      if (
+	      	((($(this).find(':nth-child(1) img').attr("alt")) === fileType) || $('#filetypes option:selected').hasClass('default')) /* check file type */
+	      	&&
+	      	((($(this).find(':nth-child(3)').text()) === serviceline) || $('#servicelines option:selected').hasClass('default')) /* check specialty */
+	      	&& 
+	      	((($(this).find(':nth-child(4)').text()) === businessType) || $('#businesses option:selected').hasClass('default')) /* check busness type */
+	      	&& 
+	      	((($(this).find(':nth-child(6)').text()) === facilityType) || $('#facility_type option:selected').hasClass('default')) /* check facility type */
+	      	&&
+	      	(($(this).find(':nth-child(7)').text() === stateSort) || (stateSort === "State"))
+	      	) {
+	        $(this).show();
+	    	$(this).addClass('shown');
+	      } else {
+	        $(this).hide();
+	        $(this).removeClass('shown');
+	      }
+	    }); //end loop
+	    // datesort conditionals
+	    if (dateSort === 'Newest First' || dateSort === 'Date') { 
+	 		$('.shown').sort(function(a,b){
+	 			return new Date($(a).attr('data-date')) > new Date($(b).attr('data-date'));
+	 		}).each(function(){
+	 			$("#results").prepend(this);
+	 		});
+	    } else if (dateSort === 'Oldest First')  {
+	    	$('.shown').sort(function(a,b){
+	 			return new Date($(a).attr('data-date')) < new Date($(b).attr('data-date'));
+	 		}).each(function(){
+	 			$("#results").prepend(this);
+	 		});
+	    //} else {
+	    	// sort by specific date range
+	    }
+	    if (!($("#results tr:first-child").is(":visible"))) {
+	    	$('#empty_alert').show();
+	    } else {
+	    	$('#empty_alert').hide();
+	    }
+		}; // end function selection
+  </script>
+</head>
+
+<body>
+
+<table id="header">
+	<tr>
+		<th><h1><%= link_to 'Content Library', documents_path %></h1></th>
+		<% if user_signed_in? %>
+		<% if !current_user.is? :accessor %>
+		<th><%= button_to 'Upload', new_document_path, method: :get %></th>
+		<% end %>
+		<th><%= button_to 'Log Out', destroy_user_session_path, method: :delete %></th>
+		<% end %>
+	</tr>
+</table>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</body>
+
+</html>

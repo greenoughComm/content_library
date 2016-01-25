@@ -1,0 +1,64 @@
+<div class="doc">
+
+<h2>Upload Document</h2>
+
+<%= form_for :document, url: documents_path, :html => {:class => 'edit_form', multipart: true } do |f| %>
+
+  <% if @document.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= pluralize(@document.errors.count, "error") %>
+        prevented this document from being uploaded:
+      </h3>
+      <ul>
+        <% @document.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+      <%= f.label :specialty %><br>
+      <%= f.select :specialty, options_for_select(["Anesthesia", "Critical Care", "Emergency Medicine", "Healthy Hearing", "Hospitalist", "Neonatology", "Office Based", "Pediatric", "Radisphere", "Sheridan Radiology"]) %>
+  </p>
+
+  <p>
+      <%= f.label :business_type %><br>
+      <%= f.select :business_type, options_for_select(["Acquisition", "Organic", "Joint Venture"]) %>
+  </p>
+
+  <p>
+      <%= f.label :document_type %><br>
+      <%= f.select :document_type, options_for_select(["Word", "Excel", "Powerpoint", "PDF", "Illustrator"]) %>
+  </p>
+
+  <p>
+      <%= f.label :facility_type %><br>
+      <%= f.select :facility_type, options_for_select(["Hospital", "Health System", "ASC"]) %>
+  </p>
+
+  <p>
+      <%= f.label :state %><br>
+      <%= f.select :state, options_for_select(Carmen::Country.named("United States").subregions.select{|state| state.type=="state"}) %>
+  </p>
+
+  <br> 
+  <p>
+      <%= f.file_field :file %>
+  </p>
+
+  <br><br>
+  <p>
+    <%= f.submit "Upload", :class => 'form_button' %>
+  </p>
+
+  <br><br>
+<% end %>
+
+</div>

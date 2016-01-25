@@ -1,0 +1,221 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+	margin: 0;
+	background-color:  #F0F0F0;
+}
+
+#header {
+	width: 100%;
+	background-color: #444;
+}
+
+h1, h2, .selector, .form_button, .download_button, #reset_link, #results tr td:nth-child(2), #results tr td:nth-child(5), #users_table th {
+	font-family: "arial narrow";
+	font-weight: bold;
+}
+
+h1 a {
+	text-decoration: none !important;
+	color: #fff;
+	font-size: 1em;
+}
+
+h1 {
+	margin-bottom: 1%;
+	margin-top: 1%;
+}
+
+h2, h3 {
+	text-align: center;
+	color: #125257;
+}
+
+#header tr th {
+	width: 15%;
+}
+
+#header tr th:first-child {
+	width: 70%;
+	font-size:1.3em;
+	text-align: left;
+	padding-left:5%;
+}
+
+.docTypeImage {
+	width: 70px;
+}
+
+#findDocsBy {
+	width: 94%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#findDocsBy tr td {
+	width: 30%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+#findDocsBy select, #new_user_button {
+	margin: auto;
+	display: block;
+	text-align: center;
+	width:90%;
+}
+
+#scroll {
+	width: 90%;
+	height: 500px;
+	overflow-y: scroll;
+	margin: auto;
+	background-color: #fff;
+}
+
+#scroll {
+	border: solid 5px #125257;
+}
+
+#results, #users_table {
+	background-color: #ffffff;
+	border-collapse: collapse; 
+}
+
+#results tr, #users_table tr {
+	width: 100%;
+    border-bottom: 2px solid #5F9EA0;
+}
+
+#results tr td, #users_table tr td {
+	text-align: center;
+}
+
+#options {
+	width: 90%;
+	margin-top: 1.5%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#options tr td {
+	width: 10%;
+	text-align: center;
+	font-family: "arial narrow";
+}
+
+
+#options tr td a {
+	text-decoration: none;
+}
+
+.doc {
+	text-align:center;
+}
+
+.edit_form select, .edit_form #document_title {
+	text-align:center;
+	width:40%;
+}
+
+.edit_user {
+	text-align: center;
+	width:100%;
+}
+
+.notice {
+	color: #458B00;
+	font-weight: bold;
+	text-align: center;
+}
+
+.alert {
+	color: #aa0000;
+	font-weight: bold;
+	text-align: center;
+}
+
+.success {
+	color: #00aa00;
+	font-weight: bold;
+}
+
+.selector, .edit_form select {
+	background: linear-gradient(#ffffff, #EED2EE);
+	font-weight: bold;
+	border: solid 1px #EED2EE;
+	font-size: 1.1em;
+}
+
+#header tr th form input, #results tr td form input, .form_button, .download_button, #reset_link, #users_table tr form input, #users_table tr td form input {
+	font-weight: bold;
+	color: #FFF;
+	height: 32px;
+	border: 1px solid #2D93C1;
+	border-radius: 4px;
+	padding: 7px 10px 4px 9px;
+	margin-bottom: 4px;
+	background: transparent linear-gradient(to bottom, #3098C6 0%, #2585B6 100%) repeat scroll 0% 0%;
+	text-decoration: none;
+}
+
+#results tr td:nth-child(1), td:nth-child(5), td:nth-child(6), td:nth-child(7) {
+	width: 10%;
+}
+
+#results tr td:nth-child(2) {
+	width: 60%;
+	font-size:1.3em;
+}
+
+#results tr td:nth-child(3), #results tr td:nth-child(4), #results tr td:nth-child(6), tr td:nth-child(7) {
+	display: none;
+}
+
+#results tr td:nth-child(9) {
+	padding-right: 1%;
+}
+
+label {
+	text-decoration: underline;
+	font-family: "arial narrow";
+}
+
+#users_table tr td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.devise_links {
+	text-align: center;
+}
+
+#empty_alert {
+	display: none;
+	margin-top: 4em;
+	text-align: center;
+	color: #aa0000;
+	font-weight: bold;
+}
+
+#users_table {
+	width: 100%;
+}
+
+.field {
+	text-align:center;
+}

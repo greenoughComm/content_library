@@ -1,0 +1,29 @@
+<h2>Manage Users</h2>
+
+<div id="scroll">
+	<table id="users_table">
+		<tr>
+			<th>User Name</th>
+			<th>Department</th>
+			<th>Email</th>
+			<th>Role</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<% @users.each do |user| %>
+			<tr>
+				<td><strong><%= user.first_name %> <%= user.last_name %></strong></td>
+				<td><%= user.department %></td>
+				<td><%= user.email %></td>
+				<td><%= user.role %></td>
+				<td><%= button_to 'Manage', edit_user_registration_path(user.id), method: :get %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
+
+<br>
+
+<div id="new_user_button">
+<%= link_to 'Create New User', new_user_registration_path, :class => 'form_button' %>
+</div>

@@ -1,0 +1,61 @@
+<div class="doc">
+
+<h2>Manage <%= @document.title %></h2>
+
+<%= form_for :document, :html => {:class => 'edit_form'}, url: document_path(@document), method: :patch do |f| %>
+
+	<% if @document.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				<%= pluralize(@document.errors.count, "error") %> prevented this document from being updated:
+			</h2>
+			<ul>
+				<% @document.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+      <%= f.label :specialty %><br>
+      <%= f.select :specialty, options_for_select(["Anesthesia", "Critical Care", "Emergency Medicine", "Healthy Hearing", "Hospitalist", "Neonatology", "Office Based", "Pediatric", "Radisphere", "Sheridan Radiology"], @document.specialty) %>
+  </p>
+
+  <p>
+      <%= f.label :business_type %><br>
+      <%= f.select :business_type, options_for_select(["Acquisition", "Organic", "Joint Venture"], @document.business_type) %>
+  </p>
+
+  <p>
+      <%= f.label :document_type %><br>
+      <%= f.select :document_type, options_for_select(["Word", "Excel", "Powerpoint", "PDF", "Illustrator"], @document.document_type) %>
+  </p>
+
+  <p>
+      <%= f.label :facility_type %><br>
+      <%= f.select :facility_type, options_for_select(["Hospital", "Health System", "ASC"], @document.facility_type) %>
+  </p>
+
+  <p>
+      <%= f.label :state %><br>
+      <%= f.select :state, options_for_select(Carmen::Country.named("United States").subregions.select{|state| state.type=="state"}, @document.state) %>
+  </p>
+
+  <br>
+  <p>
+  	<%= f.submit "Update Document", :class => 'form_button' %>
+  </p>
+
+  <% end %>
+
+  <br>
+
+  <%= button_to 'Delete Document', document_path(@document), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'form_button' %><br><br>
+
+</div>

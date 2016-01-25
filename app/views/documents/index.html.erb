@@ -1,0 +1,110 @@
+<h2>Find Documents By:</h2>
+
+<table id="findDocsBy">
+
+	<tr>
+		<td><select class="selector" id="servicelines" onchange="selection()">
+			<option class="default" selected>Service Line</option>
+			<option>Anesthesia</option>
+			<option>Critical Care</option>
+			<option>Emergency Medicine</option>
+			<option>Healthy Hearing</option>
+			<option>Hospitalist</option>
+			<option>Neonatology</option>
+			<option>Pediatric</option>
+			<option>Sheridan Radiology</option>
+			<option>Office Based</option>
+			<option class="default">All</option>
+		</select></td>
+
+		<td><select class="selector" id="businesses" onchange="selection()">
+			<option class="default" selected>Business Type</option>
+			<option>Acquisition</option>
+			<option>Organic</option>
+			<option>Joint Venture</option>
+			<option class="default">All</option>
+		</select></td>
+
+		<td><select class="selector" id="filetypes" onchange="selection()">
+			<option class="default" selected>File Type</option>
+			<option>Word</option>
+			<option>Powerpoint</option>
+			<option>Excel</option>
+			<option>PDF</option>
+			<option>Illustrator</option>
+			<option class="default">All</option>
+		</select></td>
+	</tr>
+
+	<tr>
+		<td><select class="selector" id="facility_type" onchange="selection()">
+			<option class="default" selected>Facility Type</option>
+			<option>Hospital</option>
+			<option>Health System</option>
+			<option>ASC</option>
+			<option class="default">All</option>
+		</select></td>
+
+		<td><%= select_tag "state_select", options_for_select(Carmen::Country.named("United States").subregions.select{|state| state.type=="state"}.collect{|state| state.name }.insert(0, "State"), :class=>'default'), :class => 'selector', :onchange => "selection()" %>  
+
+		<td><select class="selector" id="datecreated" onchange="selection()">
+			<option class="default" selected>Date</option>
+			<option>Newest First</option>
+			<option>Oldest First</option>
+		</select></td> 
+	</tr>
+
+</table>
+
+<br><br>
+
+<div id="scroll">
+<table id="results">
+	<% @documents.each do |document| %>
+		<tr data-date=<%= document.created_at.strftime("%m/%d/%y") %>>
+			<% if document.document_type == "Excel" %>
+				<td><img class="docTypeImage" src="http://www.guidingtech.com/assets/postimages/2013/01/MS-Excel-Logo.png" alt="Excel"></td>
+			<% elsif document.document_type == "Powerpoint" %>
+				<td><img class="docTypeImage" src="http://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/042013/logo_microsoft_powerpoint_2013.png" alt="Powerpoint"></td>
+			<% elsif document.document_type == "Word" %>
+				<td><img class="docTypeImage" src="http://upload.wikimedia.org/wikipedia/commons/4/48/Microsoft_Word_logo.png" alt="Word"></td>
+			<% elsif document.document_type == "PDF" %>
+				<td><img class="docTypeImage" src="http://www.rentfaxpro.com/wp-content/uploads/2014/11/PDF-Logo.png" alt="PDF"></td>
+			<% elsif document.document_type == "Illustrator" %>
+				<td><img class="docTypeImage" src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Adobe_Illustrator_CS5_icon.svg" alt="Illustrator"></td>
+			<% end %>
+			<td><strong><%= document.title %></strong></td>
+			<td><%= document.specialty %></td>
+			<td><%= document.business_type %></td>
+			<td><%= document.created_at.strftime("%m/%d/%y") %></td>
+			<td><%= document.facility_type %></td>
+			<td><%= document.state %></td>
+			<% if !current_user.is? :accessor %>
+			<td><%= button_to 'Manage', edit_document_path(document), method: :get %></td>
+			<% end %>
+			<td><%= link_to 'Download', document.get_url, :class => 'download_button' %></td>
+		</tr>
+	<% end %>
+</table>
+<p id="empty_alert">No results match your query. Please expand your search and try again!</p>
+</div>
+
+<table id="options">
+	<tr>
+		<td><p id="user_info"><%= current_user.email %> | <%= current_user.role %></p></td>
+		<td><%= link_to 'Admin', users_path, :class => 'form_button' %></td>
+		<td><%= link_to 'Information', documents_path, :class => 'form_button' %></td>
+		<td><%= link_to 'Request Content', documents_path, :class => 'form_button' %></td>
+	</tr>
+
+</table>
+
+<script>
+    setTimeout(
+    	function() {
+	    	alert("The links on this page have timed out. To access documents, please refresh the page.");
+	    	$('.download_button').text("Link Expired");
+	    	$('.download_button').css("background", "transparent linear-gradient(to bottom, #FF4C4C 0%, #F43939 100%) repeat scroll 0% 0%");
+	    	$('.download_button').css("border", "1px solid #FC4747");
+    	}, 300000);
+</script>
